@@ -1,3 +1,13 @@
 spring:
   application:
     name: registroClientes
+  datasource:
+    url: jdbc:postgresql://localhost:5433/cadastro-clientes
+    username: postgres
+    password: 123456
+  jpa:
+    hibernate:
+      ddl-auto: none
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
