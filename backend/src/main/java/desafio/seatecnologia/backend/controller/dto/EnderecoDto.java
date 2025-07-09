@@ -18,7 +18,7 @@ public class EnderecoDto {
     private String bairro;
 
     @NotBlank(message = "cidade é obrigatório")
-    private String cidade;
+    private String localidade;
 
     @NotBlank(message = "UF é obrigatório")
     @Size(min = 2, max = 2, message = "UF deve ter 2 caracteres")
