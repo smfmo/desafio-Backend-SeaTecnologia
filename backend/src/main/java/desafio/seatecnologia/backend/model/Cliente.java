@@ -2,6 +2,7 @@ package desafio.seatecnologia.backend.model;
 
 import lombok.Data;
 import javax.persistence.*;
+import javax.validation.Valid;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
@@ -17,12 +18,10 @@ public class Cliente {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank
-    @Size(min = 3, max = 100)
-    @Pattern(regexp = "^[a-zA-Z0-9 ]+$")
+    @Column(name = "nome")
     private String nome;
 
-    @NotBlank
+    @Column(name = "cpf")
     private String cpf;
 
     @Embedded
@@ -40,6 +39,5 @@ public class Cliente {
             name = "emails_cliente",
             joinColumns = @JoinColumn(name = "cliente_id")
     )
-    @Email
     private List<String> emails;
 }

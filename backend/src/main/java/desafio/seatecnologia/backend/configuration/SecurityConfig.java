@@ -13,6 +13,9 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+import org.springframework.web.filter.CorsFilter;
 
 @Configuration
 @EnableWebSecurity
@@ -26,8 +29,8 @@ public class SecurityConfig {
         http
                 .csrf().disable()
                 .authorizeHttpRequests(auth -> auth
-                        .antMatchers("/api/auth/**").permitAll()
-                        .antMatchers("/clientes/**").hasAnyRole("ADMIN", "USER")
+                        .antMatchers("/auth/**").permitAll()
+                        .antMatchers(HttpMethod.GET, "/clientes/**").hasAnyRole("ADMIN", "USER")
                         .antMatchers(HttpMethod.POST, "/clientes").hasRole("ADMIN")
                         .antMatchers(HttpMethod.PUT, "/clientes").hasRole("ADMIN")
                         .antMatchers(HttpMethod.DELETE, "/clientes").hasRole("ADMIN")
@@ -52,6 +55,18 @@ public class SecurityConfig {
             UsuarioService usuarioService,
             PasswordEncoder passwordEncoder) {
         return new CustomAuthenticationProvider(usuarioService, passwordEncoder);
+    }
+
+    @Bean
+    public CorsFilter corsFilter() {
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        CorsConfiguration config = new CorsConfiguration();
+        config.setAllowCredentials(true);
+        config.addAllowedOrigin("*");
+        config.addAllowedHeader("*");
+        config.addAllowedMethod("*");
+        source.registerCorsConfiguration("/**", config);
+        return new CorsFilter(source);
     }
 
 }

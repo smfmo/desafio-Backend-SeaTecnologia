@@ -11,10 +11,8 @@ import javax.validation.constraints.NotBlank;
 @Embeddable
 public class Telefone {
 
-    @NotBlank
     @Enumerated(EnumType.STRING)
     private TipoTelefone tipo;
 
-    @NotBlank
     private String numero;
 }

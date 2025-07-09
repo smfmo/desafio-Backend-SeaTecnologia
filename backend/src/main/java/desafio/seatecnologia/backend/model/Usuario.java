@@ -1,5 +1,6 @@
 package desafio.seatecnologia.backend.model;
 
+import desafio.seatecnologia.backend.model.enums.Roles;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -21,11 +22,7 @@ public class Usuario {
     @Column(nullable = false)
     private String password;
 
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(
-            name = "usuarios_roles",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "role_id")
-    )
-    private Collection<Role> roles;
+    @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
+    private Roles roles;
 }
