@@ -1,38 +1,46 @@
 package desafio.seatecnologia.backend.model;
 
 import lombok.Data;
+
 import javax.persistence.*;
-import java.util.ArrayList;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 import java.util.List;
 
 @Entity
-@Table(name = "clientes",
-        schema = "public")
 @Data
+@Table(name = "clientes")
 public class Cliente {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "nome")
+    @NotBlank
+    @Size(min = 3, max = 100)
+    @Pattern(regexp = "^[a-zA-Z0-9 ]+$")
     private String nome;
 
-    @Column(name = "cpf")
+    @NotBlank
     private String cpf;
 
-    @Column(name = "email")
-    private List<String> email = new ArrayList<>();
-
-    @Column(name = "telefones")
-    @OneToMany(mappedBy = "clientes",
-            cascade = CascadeType.ALL,
-            orphanRemoval = true)
-    private List<Telefone> telefone = new ArrayList<>();
-
-    @OneToOne(cascade = CascadeType.ALL,
-            fetch = FetchType.LAZY)
-    @JoinColumn(name = "endereco_id")
+    @Embedded
     private Endereco endereco;
 
+    @ElementCollection
+    @CollectionTable(
+            name = "telefones_cliente",
+            joinColumns = @JoinColumn(name = "cliente_id")
+    )
+    private List<Telefone> telefones;
+
+    @ElementCollection
+    @CollectionTable(
+            name = "emails_cliente",
+            joinColumns = @JoinColumn(name = "cliente_id")
+    )
+    @Email
+    private List<String> emails;
 }

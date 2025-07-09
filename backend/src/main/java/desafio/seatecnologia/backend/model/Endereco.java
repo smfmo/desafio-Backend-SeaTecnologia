@@ -2,33 +2,28 @@ package desafio.seatecnologia.backend.model;
 
 import lombok.Data;
 
-import javax.persistence.*;
+import javax.persistence.Embeddable;
+import javax.validation.constraints.NotBlank;
 
-@Entity
-@Table(name = "endereco",
-        schema = "public")
 @Data
+@Embeddable
 public class Endereco {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
-    @Column(name = "cep", nullable = false)
+    @NotBlank
     private String cep;
 
-    @Column(name = "logradouro", nullable = false)
+    @NotBlank
     private String logradouro;
 
-    @Column(name = "bairro", nullable = false)
+    @NotBlank
     private String bairro;
 
-    @Column(name = "cidade", nullable = false)
+    @NotBlank
     private String cidade;
 
-    @Column(name = "uf", nullable = false)
+    @NotBlank
     private String uf;
 
-    @Column(name = "complemento")
     private String complemento;
+
 }
