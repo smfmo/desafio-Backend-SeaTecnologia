@@ -26,7 +26,7 @@ public class ClienteDto {
 
     @Valid
     @NotEmpty(message = "Pelo menos um e-mail é obrigatório")
-    private List< @Email String> emails;
+    private List<@Email String> emails;
 
     @Valid
     @NotNull(message = "Endereço é obrigatório")

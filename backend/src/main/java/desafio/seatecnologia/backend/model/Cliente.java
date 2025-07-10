@@ -2,11 +2,6 @@ package desafio.seatecnologia.backend.model;
 
 import lombok.Data;
 import javax.persistence.*;
-import javax.validation.Valid;
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Size;
 import java.util.List;
 
 @Entity
@@ -24,9 +19,6 @@ public class Cliente {
     @Column(name = "cpf")
     private String cpf;
 
-    @Embedded
-    private Endereco endereco;
-
     @ElementCollection
     @CollectionTable(
             name = "telefones_cliente",
@@ -40,4 +32,10 @@ public class Cliente {
             joinColumns = @JoinColumn(name = "cliente_id")
     )
     private List<String> emails;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "endereco_id")
+    private Endereco endereco;
+
+
 }

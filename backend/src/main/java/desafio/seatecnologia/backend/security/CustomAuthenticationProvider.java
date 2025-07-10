@@ -4,16 +4,15 @@ import desafio.seatecnologia.backend.model.Usuario;
 import desafio.seatecnologia.backend.service.UsuarioService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationProvider;
-import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import java.util.Collections;
-import java.util.List;
+import org.springframework.stereotype.Component;
 
 @RequiredArgsConstructor
+@Component
 public class CustomAuthenticationProvider implements AuthenticationProvider {
 
     private final UsuarioService usuarioService;
@@ -23,29 +22,26 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
 
         String username = authentication.getName();
-        String password = authentication.getCredentials().toString();
+        String senhaDigitada = authentication.getCredentials().toString();
 
-        Usuario usuario = usuarioService.findByUsername(username);
-        if (usuario == null) {
-            throw new BadCredentialsException("Usuario no encontrado");
-        }
-        if (!passwordEncoder.matches(password, usuario.getPassword())) {
-            throw new BadCredentialsException("senha incorreta");
+        Usuario usuarioEncontrado = usuarioService.findByUsername(username);
+
+        if (usuarioEncontrado == null) {
+            throw new UsernameNotFoundException("Usuário e/ou senha incorretos");
         }
 
-        List<SimpleGrantedAuthority> authorities = Collections.singletonList(
-                new SimpleGrantedAuthority("ROLE_" + usuario.getRoles())
-        );
+        String senhaCriptografada = usuarioEncontrado.getPassword();
+        boolean senhasBatem = passwordEncoder.matches(senhaDigitada, senhaCriptografada);
 
-        return new UsernamePasswordAuthenticationToken(
-                username,
-                null,
-                authorities
-        );
+        if (senhasBatem){
+            return new CustomAuthentication(usuarioEncontrado);
+        }
+
+       throw new UsernameNotFoundException("Usuário e/ou senha incorretos");
     }
 
     @Override
     public boolean supports(Class<?> authentication) {
-        return UsernamePasswordAuthenticationToken.class.isAssignableFrom(authentication);
+        return authentication.isAssignableFrom(UsernamePasswordAuthenticationToken.class);
     }
 }

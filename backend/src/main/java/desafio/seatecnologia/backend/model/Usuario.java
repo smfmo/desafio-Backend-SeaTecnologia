@@ -1,14 +1,18 @@
 package desafio.seatecnologia.backend.model;
 
-import desafio.seatecnologia.backend.model.enums.Roles;
+import io.hypersistence.utils.hibernate.type.array.ListArrayType;
 import lombok.Data;
+import org.hibernate.annotations.Type;
+import org.hibernate.annotations.TypeDef;
 
 import javax.persistence.*;
-import java.util.Collection;
+import java.util.List;
 
 @Entity
 @Table(name = "usuarios")
 @Data
+@TypeDef(name = "list-array",
+        typeClass = ListArrayType.class)
 public class Usuario {
 
     @Id
@@ -22,7 +26,8 @@ public class Usuario {
     @Column(nullable = false)
     private String password;
 
-    @Column(nullable = false)
-    @Enumerated(EnumType.STRING)
-    private Roles roles;
+    @Type(type = "list-array")
+    @Column(name = "roles",
+            columnDefinition = "varchar[]")
+    private List<String> roles;
 }

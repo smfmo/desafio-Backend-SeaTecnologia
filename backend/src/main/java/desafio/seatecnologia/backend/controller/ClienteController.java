@@ -39,7 +39,7 @@ public class ClienteController {
     @PostMapping
     @PreAuthorize("hasRole('ADMIN')")
     @CrossOrigin(origins = "*", allowedHeaders = "*")
-    public ResponseEntity<Cliente> salvarCliente(@Valid @RequestBody ClienteDto dto) {
+    public ResponseEntity<Cliente> salvarCliente(@RequestBody @Valid ClienteDto dto) {
         Cliente cliente = mapper.toEntity(dto);
         Cliente clienteSalvo = clienteService.salvar(cliente);
         return ResponseEntity.ok(clienteSalvo);
