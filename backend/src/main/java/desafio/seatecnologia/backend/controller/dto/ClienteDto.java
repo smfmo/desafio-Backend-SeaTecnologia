@@ -9,6 +9,8 @@ import java.util.List;
 
 @Data
 public class ClienteDto {
+
+    private Long id;
     @NotBlank(message = "Nome é obrigatório")
     @Size(min = 3, max = 100, message = "nome deve ter entre 3 e 100 caracteres")
     @Pattern(regexp = "^[\\p{L}0-9\\s]+$", message = "Nome só pode conter letras, números e espaços")

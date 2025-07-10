@@ -23,7 +23,8 @@ public class ClienteController {
     @GetMapping
     @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
     public ResponseEntity<List<Cliente>> listarClientes() {
-        return new ResponseEntity<>(clienteService.findAll(), HttpStatus.OK);
+        List<Cliente> clientes = clienteService.findAll();
+        return new ResponseEntity<>(clientes, HttpStatus.OK);
     }
 
     @GetMapping(params = "id")
@@ -37,9 +38,11 @@ public class ClienteController {
 
     @PostMapping
     @PreAuthorize("hasRole('ADMIN')")
+    @CrossOrigin(origins = "*", allowedHeaders = "*")
     public ResponseEntity<Cliente> salvarCliente(@Valid @RequestBody ClienteDto dto) {
         Cliente cliente = mapper.toEntity(dto);
-        return ResponseEntity.ok(clienteService.salvar(cliente));
+        Cliente clienteSalvo = clienteService.salvar(cliente);
+        return ResponseEntity.ok(clienteSalvo);
     }
 
     @DeleteMapping("/{id}")

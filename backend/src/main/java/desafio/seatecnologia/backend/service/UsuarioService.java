@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class UsuarioService {
+public class UsuarioService  {
 
     private final UsuarioRepository usuarioRepository;
     private final PasswordEncoder passwordEncoder;
@@ -31,4 +31,5 @@ public class UsuarioService {
     public Usuario findByUsername(String username){
         return usuarioRepository.findByUsername(username);
     }
+
 }

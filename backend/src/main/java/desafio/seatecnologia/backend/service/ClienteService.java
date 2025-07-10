@@ -4,6 +4,7 @@ import desafio.seatecnologia.backend.model.Cliente;
 import desafio.seatecnologia.backend.repository.ClienteRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityNotFoundException;
 import java.util.List;
@@ -18,6 +19,7 @@ public class ClienteService {
         return clienteRepository.findAll();
     }
 
+    @Transactional
     public Cliente salvar(Cliente cliente) {
         return clienteRepository.save(cliente);
     }
