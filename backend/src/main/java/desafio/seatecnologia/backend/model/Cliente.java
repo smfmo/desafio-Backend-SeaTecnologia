@@ -1,8 +1,6 @@
 package desafio.seatecnologia.backend.model;
 
 import lombok.Data;
-import org.hibernate.action.internal.OrphanRemovalAction;
-
 import javax.persistence.*;
 import java.util.List;
 
@@ -39,6 +37,5 @@ public class Cliente {
             orphanRemoval = true)
     @JoinColumn(name = "endereco_id")
     private Endereco endereco;
-
 
 }

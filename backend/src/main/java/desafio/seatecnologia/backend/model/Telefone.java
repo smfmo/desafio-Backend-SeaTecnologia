@@ -5,7 +5,6 @@ import lombok.Data;
 import javax.persistence.Embeddable;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.validation.constraints.NotBlank;
 
 @Data
 @Embeddable

@@ -2,7 +2,6 @@ package desafio.seatecnologia.backend.controller.dto;
 
 import lombok.Data;
 import org.hibernate.validator.constraints.br.CPF;
-
 import javax.validation.Valid;
 import javax.validation.constraints.*;
 import java.util.List;
@@ -31,6 +30,4 @@ public class ClienteDto {
     @Valid
     @NotNull(message = "Endereço é obrigatório")
     private EnderecoDto endereco;
-
-
 }

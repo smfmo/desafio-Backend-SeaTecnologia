@@ -7,8 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.test.context.ActiveProfiles;
-import org.junit.jupiter.api.Assertions;
+import org.springframework.transaction.annotation.Transactional;
+import java.util.ArrayList;
 import java.util.Collections;
+import static org.junit.jupiter.api.Assertions.*;
 
 
 @ActiveProfiles("test")
@@ -20,49 +22,51 @@ class UsuarioRepositoryTest {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-    private static final String USER_USERNAME = "user";
-    private static final String USER_PASSWORD = "teste";
-    private static final String ADMIN_USERNAME = "admin";
-    private static final String ADMIN_PASSWORD = "123qwe!@#";
-
     @Test
     @DisplayName("Salvar usuários")
-    public void salvarUsuarioTest(){
-        // Arrange (preparação)
-        Usuario usuario = new Usuario();
-        usuario.setUsername(ADMIN_USERNAME);
-        usuario.setPassword(passwordEncoder.encode(ADMIN_PASSWORD));
-        usuario.setRoles(Collections.singletonList("ADMIN"));
+    @Transactional
+    public void deveSalvarUsuarioComSucesso(){
 
+        Usuario usuario = criarUsuarioAdminTest();
         Usuario usuarioSalvo = usuarioRepository.save(usuario); // action (ação)
 
         // Assert (verificação)
-        Assertions.assertNotNull(usuarioSalvo.getId());
-        Assertions.assertEquals(ADMIN_USERNAME, usuarioSalvo.getUsername());
-        Assertions.assertTrue(passwordEncoder.matches(ADMIN_PASSWORD, usuarioSalvo.getPassword()));
-        Assertions.assertTrue(usuarioSalvo.getRoles().contains("ADMIN"));
-
-        System.out.println("Usuario salvo com sucesso: \n" + usuarioSalvo);
+        assertNotNull(usuarioSalvo.getId());
+        assertEquals(usuario.getUsername(), usuarioSalvo.getUsername());
+        assertTrue(passwordEncoder.matches("123qwe!@#", usuarioSalvo.getPassword()));
+        assertTrue(usuarioSalvo.getRoles().contains("ADMIN"));
     }
 
     @Test
     @DisplayName("Encontrar usuários pelo username")
+    @Transactional
     public void findByUsernameTest(){
-        Usuario usuario = new Usuario();
-        usuario.setUsername(USER_USERNAME);
-        usuario.setPassword(passwordEncoder.encode(USER_PASSWORD));
-        usuario.setRoles(Collections.singletonList("USER"));
+
+        Usuario usuario = criarUsuarioComumTest();
         usuarioRepository.save(usuario);
+        Usuario usuarioEncontrado = usuarioRepository.findByUsername(usuario.getUsername());
 
-        Usuario usuarioEncontrado = usuarioRepository.findByUsername(USER_USERNAME);
+        assertNotNull(usuarioEncontrado);
+        assertEquals(usuario.getUsername(), usuarioEncontrado.getUsername());
+        assertTrue(passwordEncoder.matches("123qwe123", usuarioEncontrado.getPassword()));
+        assertTrue(usuarioEncontrado.getRoles().contains("USER"));
+    }
 
-
-        Assertions.assertNotNull(usuarioEncontrado);
-        Assertions.assertEquals(USER_USERNAME, usuarioEncontrado.getUsername());
-        Assertions.assertTrue(passwordEncoder.matches(USER_PASSWORD, usuarioEncontrado.getPassword()));
-        Assertions.assertTrue(usuarioEncontrado.getRoles().contains("USER"));
-
-        System.out.println("Usuario encontrado com sucesso: \n" + usuarioEncontrado);
+    @DisplayName("método utilitário")
+    private Usuario criarUsuarioAdminTest(){
+        Usuario usuario = new Usuario();
+        usuario.setUsername("admin");
+        usuario.setPassword(passwordEncoder.encode("123qwe!@#"));
+        usuario.setRoles(new ArrayList<>(Collections.singletonList("ADMIN")));
+        return usuario;
+    }
+    @DisplayName("método utilitário")
+    private Usuario criarUsuarioComumTest(){
+        Usuario usuario = new Usuario();
+        usuario.setUsername("user");
+        usuario.setPassword(passwordEncoder.encode("123qwe123"));
+        usuario.setRoles(new ArrayList<>(Collections.singletonList("USER")));
+        return usuario;
     }
 
 }

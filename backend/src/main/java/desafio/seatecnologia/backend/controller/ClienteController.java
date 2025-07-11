@@ -11,7 +11,6 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/clientes")
@@ -45,6 +44,13 @@ public class ClienteController {
         return ResponseEntity.ok(clienteSalvo);
     }
 
+    @PutMapping("/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
+    public ResponseEntity<Cliente> atualizarCliente(@PathVariable Long id,
+                                                    @RequestBody @Valid ClienteDto dto) {
+        Cliente clienteAtualizado = clienteService.atualizar(id, mapper.toEntity(dto));
+        return ResponseEntity.ok(clienteAtualizado);
+    }
 
     @DeleteMapping("/{id}")
     @PreAuthorize("hasRole('ADMIN')")

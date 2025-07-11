@@ -2,7 +2,6 @@ package desafio.seatecnologia.backend.controller.dto;
 
 import desafio.seatecnologia.backend.model.enums.TipoTelefone;
 import lombok.Data;
-
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;

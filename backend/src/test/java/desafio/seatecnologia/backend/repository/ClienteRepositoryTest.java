@@ -4,12 +4,12 @@ import desafio.seatecnologia.backend.model.Cliente;
 import desafio.seatecnologia.backend.model.Endereco;
 import desafio.seatecnologia.backend.model.Telefone;
 import desafio.seatecnologia.backend.model.enums.TipoTelefone;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.transaction.annotation.Transactional;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Optional;
@@ -23,6 +23,7 @@ class ClienteRepositoryTest {
     private ClienteRepository clienteRepository;
 
     @Test
+    @DisplayName("cadastro de clientes")
     @Transactional
     public void deveSalvarClienteComSucesso(){
 
@@ -41,6 +42,7 @@ class ClienteRepositoryTest {
     }
 
     @Test
+    @DisplayName("busca de clientes pelo Id")
     @Transactional
     public void deveBuscarClientePorId(){
 
@@ -54,6 +56,7 @@ class ClienteRepositoryTest {
     }
 
     @Test
+    @DisplayName("atualização de dados dos clientes")
     @Transactional
     public void deveAtualizarCliente(){
 
@@ -62,10 +65,10 @@ class ClienteRepositoryTest {
         Cliente clienteAtualizado = clienteRepository.save(clienteSalvo);
 
         assertEquals("novo nome", clienteAtualizado.getNome());
-        System.out.println("cliente atualizado: \n" + clienteAtualizado);
     }
 
     @Test
+    @DisplayName("exclusão de clientes")
     @Transactional
     public void deveExcluirCliente(){
 
@@ -77,7 +80,8 @@ class ClienteRepositoryTest {
 
     }
 
-    private Cliente criarClienteTest(){// metodo utilitário
+    @DisplayName("método utilitário")
+    private Cliente criarClienteTest(){
         Endereco endereco = new Endereco();
         endereco.setLogradouro("Logradouro-Test");
         endereco.setBairro("Bairro-Test");
