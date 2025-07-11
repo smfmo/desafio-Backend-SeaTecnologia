@@ -7,12 +7,13 @@ CREATE TABLE clientes ( -- clientes --
     endereco_id BIGINT,
 
     -- constraints --
-    CONSTRAINT fk_endereco FOREIGN KEY (endereco_id) REFERENCES endereco(id)
+    CONSTRAINT fk_endereco FOREIGN KEY (endereco_id) REFERENCES endereco(id) ON DELETE CASCADE
 );
 
 CREATE TABLE endereco ( -- endereços dos clientes --
     id BIGSERIAL PRIMARY KEY NOT NULL,
     bairro VARCHAR(100) NOT NULL,
+    logradouro VARCHAR(100) NOT NULL,
     cep VARCHAR(10) NOT NULL,
     complemento VARCHAR(255),
     localidade VARCHAR(30) NOT NULL,
@@ -24,7 +25,7 @@ CREATE TABLE emails_cliente (
     emails VARCHAR(100) NOT NULL,
 
    -- constraints --
-   CONSTRAINT fk_cliente FOREIGN KEY (cliente_id) REFERENCES clientes(id)
+   CONSTRAINT fk_cliente FOREIGN KEY (cliente_id) REFERENCES clientes(id) ON DELETE CASCADE
 );
 
 CREATE TABLE telefones_cliente (
@@ -33,7 +34,7 @@ CREATE TABLE telefones_cliente (
     tipo VARCHAR (50),
 
     -- constraints --
-    CONSTRAINT fk_cliente FOREIGN KEY (cliente_id) REFERENCES clientes(id),
+    CONSTRAINT fk_cliente FOREIGN KEY (cliente_id) REFERENCES clientes(id) ON DELETE CASCADE,
     CONSTRAINT check_tipo CHECK (tipo IN ('CELULAR', 'COMERCIAL', 'RESIDENCIAL'))
 );
 

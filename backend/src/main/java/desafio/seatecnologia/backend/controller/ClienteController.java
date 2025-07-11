@@ -11,6 +11,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/clientes")
@@ -32,7 +33,6 @@ public class ClienteController {
     public ResponseEntity<ClienteDto> buscarClientePorId(Long id) {
         Cliente cliente = clienteService.buscarPorId(id);
         ClienteDto clienteDto = mapper.toDto(cliente);
-
         return ResponseEntity.ok(clienteDto);
     }
 
@@ -44,6 +44,7 @@ public class ClienteController {
         Cliente clienteSalvo = clienteService.salvar(cliente);
         return ResponseEntity.ok(clienteSalvo);
     }
+
 
     @DeleteMapping("/{id}")
     @PreAuthorize("hasRole('ADMIN')")

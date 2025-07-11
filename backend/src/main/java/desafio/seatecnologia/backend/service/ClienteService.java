@@ -1,12 +1,17 @@
 package desafio.seatecnologia.backend.service;
 
+import desafio.seatecnologia.backend.controller.dto.ClienteDto;
+import desafio.seatecnologia.backend.controller.dto.TelefoneDto;
 import desafio.seatecnologia.backend.model.Cliente;
+import desafio.seatecnologia.backend.model.Endereco;
 import desafio.seatecnologia.backend.repository.ClienteRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityNotFoundException;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @Service
