@@ -5,6 +5,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.Customizer;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -18,6 +19,8 @@ import org.springframework.web.filter.CorsFilter;
 @Configuration
 @EnableWebSecurity
 @RequiredArgsConstructor
+@EnableMethodSecurity(securedEnabled = true,
+        jsr250Enabled = true)
 public class SecurityConfig {
 
     @Bean
@@ -27,12 +30,8 @@ public class SecurityConfig {
                 .cors().and()
                 .csrf().disable()
                 .authorizeHttpRequests(auth -> auth
-                        .antMatchers(HttpMethod.POST,"/auth/login").permitAll()
                         .antMatchers(HttpMethod.POST,"/usuarios/**").permitAll()
-                        .antMatchers(HttpMethod.GET, "/clientes/**").hasAnyRole("ADMIN", "USER")
-                        .antMatchers(HttpMethod.POST, "/clientes").hasRole("ADMIN")
-                        .antMatchers(HttpMethod.PUT, "/clientes").hasRole("ADMIN")
-                        .antMatchers(HttpMethod.DELETE, "/clientes").hasRole("ADMIN")
+                        .antMatchers("/login/**").permitAll()
                         .anyRequest().authenticated()
                 )
                 .sessionManagement(session -> session

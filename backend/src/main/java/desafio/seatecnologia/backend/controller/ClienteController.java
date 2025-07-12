@@ -37,11 +37,10 @@ public class ClienteController {
 
     @PostMapping
     @PreAuthorize("hasRole('ADMIN')")
-    @CrossOrigin(origins = "*", allowedHeaders = "*")
-    public ResponseEntity<Cliente> salvarCliente(@RequestBody @Valid ClienteDto dto) {
+    public ResponseEntity<Void> salvarCliente(@RequestBody @Valid ClienteDto dto) {
         Cliente cliente = mapper.toEntity(dto);
-        Cliente clienteSalvo = clienteService.salvar(cliente);
-        return ResponseEntity.ok(clienteSalvo);
+        clienteService.salvar(cliente);
+        return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
     @PutMapping("/{id}")

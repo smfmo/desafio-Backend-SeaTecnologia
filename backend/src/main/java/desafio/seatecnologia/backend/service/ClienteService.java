@@ -19,8 +19,8 @@ public class ClienteService {
     }
 
     @Transactional
-    public Cliente salvar(Cliente cliente) {
-        return clienteRepository.save(cliente);
+    public void salvar(Cliente cliente) {
+        clienteRepository.save(cliente);
     }
 
     public Cliente buscarPorId(Long id) {
