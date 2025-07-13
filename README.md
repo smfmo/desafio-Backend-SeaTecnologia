@@ -2,6 +2,7 @@
 <p align="center">
     <img src="https://www.vectorlogo.zone/logos/springio/springio-icon.svg" alt="Spring Boot" width="70" />
     <img src="https://www.vectorlogo.zone/logos/java/java-icon.svg" alt="Java" width="70" />
+    <img src="https://www.vectorlogo.zone/logos/reactjs/reactjs-icon.svg" alt="Java" width="70" />
 </p>
 Desafio técnico proposto pela SEA como parte do processo seletivo
 para a vaga de desenvolvedor Backend Júnior.
@@ -53,7 +54,7 @@ do banco.
 aplicativos Docker multi-contêiner.
 (utilizado para criação dos containers do postgreSQL + Pgadmin4).
 
-## 📦 Dependências
+## ⚙️ Dependências
 - Hypersistence: biblioteca para otimizações avançadas de JPA/hibernate
 - Mapstruct: Gerador de mapeamento que converte entidade para Dto e vice-versa.
 - Lombok: Biblioteca que reduz o boilerplate
@@ -214,6 +215,42 @@ aplicativos Docker multi-contêiner.
 	</build>
 
 </project>
+```
+
+## 📦 Estrutura do projeto:
+```
+📦 registro-clientes-backend
+├── 📁 src
+│   ├── 📁 main
+│   │   ├── 📁 java
+│   │   │   └── 📁 desafio
+│   │   │       └── 📁 seatecnologia
+│   │   │            └── 📁 backend
+│   │   │                 ├── 📁 configuration          
+│   │   │                 ├── 📁 controller         
+│   │   │                 │    ├── 📁 dto
+│   │   │                 │    └── 📁 mappers
+│   │   │                 ├── 📁exceptions
+│   │   │                 ├── 📁 model
+│   │   │                 │    └── 📁 enums
+│   │   │                 ├── 📁 repository 
+│   │   │                 ├── 📁 security
+│   │   │                 ├── 📁 service         
+│   │   │                 └── 📄 RegistroClientesApplication.java 
+│   │   └── 📁 resources
+│   │        └── 📄 application.yml           
+│
+├── 📁 test  
+│    ├── 📁 java
+│    │     └── 📁 desafio              
+│    │          └── 📁 seatecnologia 
+│    │               └── 📁 backend 
+│    │                     └── 📁 repository
+│    └── 📁 resources
+│         └── 📄 application-test.yml
+├── 📄 docker-compose.yml                             
+├── 📄 pom.xml                     
+
 ```
 
 
