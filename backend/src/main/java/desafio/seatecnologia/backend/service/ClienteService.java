@@ -12,24 +12,24 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ClienteService {
 
-    private final ClienteRepository clienteRepository;
+    private final ClienteRepository repository;
 
     public List<Cliente> findAll() {
-        return clienteRepository.findAll();
+        return repository.findAll();
     }
 
     @Transactional
     public void salvar(Cliente cliente) {
-        clienteRepository.save(cliente);
+        repository.save(cliente);
     }
 
     public Cliente buscarPorId(Long id) {
-        return clienteRepository.findById(id).orElseThrow(
+        return repository.findById(id).orElseThrow(
                 () -> new EntityNotFoundException("Cliente não encontrado com o id:" + id));
     }
 
     public Cliente atualizar(Long id,Cliente clienteAtualizado) {
-        Cliente clienteExistente = clienteRepository.findById(id).orElseThrow(
+        Cliente clienteExistente =repository.findById(id).orElseThrow(
                 () -> new EntityNotFoundException("cliente não encontrado"));
 
         clienteExistente.setNome(clienteAtualizado.getNome());
@@ -38,10 +38,10 @@ public class ClienteService {
         clienteExistente.setTelefones(clienteAtualizado.getTelefones());
         clienteExistente.setEndereco(clienteAtualizado.getEndereco());
 
-        return clienteRepository.save(clienteExistente);
+        return repository.save(clienteExistente);
     }
 
     public void excluir(Long id) {
-        clienteRepository.deleteById(id);
+       repository.deleteById(id);
     }
 }

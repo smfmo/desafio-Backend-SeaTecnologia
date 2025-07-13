@@ -22,7 +22,7 @@ import java.util.List;
 @Tag(name = "Clientes")
 public class ClienteController {
 
-    private final ClienteService clienteService;
+    private final ClienteService service;
     private final ClienteMapper mapper;
 
     @GetMapping
@@ -30,7 +30,7 @@ public class ClienteController {
     @Operation(summary = "Listar Clientes", description = "listar todos os clientes")
     @ApiResponse(responseCode = "200", description = "clientes encontrados com sucesso")
     public ResponseEntity<List<Cliente>> listarClientes() {
-        List<Cliente> clientes = clienteService.findAll();
+        List<Cliente> clientes = service.findAll();
         return new ResponseEntity<>(clientes, HttpStatus.OK);
     }
 
@@ -39,7 +39,7 @@ public class ClienteController {
     @Operation(summary = "Buscar dados", description = "retorna os dados do cliente pelo Id")
     @ApiResponse(responseCode = "200", description = "Cliente encontrado com sucesso")
     public ResponseEntity<ClienteDto> buscarClientePorId(@PathVariable("id") Long id) {
-        Cliente cliente = clienteService.buscarPorId(id);
+        Cliente cliente = service.buscarPorId(id);
         ClienteDto clienteDto = mapper.toDto(cliente);
         return ResponseEntity.ok(clienteDto);
     }
@@ -53,7 +53,7 @@ public class ClienteController {
     })
     public ResponseEntity<Void> salvarCliente(@RequestBody @Valid ClienteDto dto) {
         Cliente cliente = mapper.toEntity(dto);
-        clienteService.salvar(cliente);
+        service.salvar(cliente);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
@@ -66,7 +66,7 @@ public class ClienteController {
     })
     public ResponseEntity<Cliente> atualizarCliente(@PathVariable Long id,
                                                     @RequestBody @Valid ClienteDto dto) {
-        Cliente clienteAtualizado = clienteService.atualizar(id, mapper.toEntity(dto));
+        Cliente clienteAtualizado = service.atualizar(id, mapper.toEntity(dto));
         return ResponseEntity.ok(clienteAtualizado);
     }
 
@@ -75,7 +75,7 @@ public class ClienteController {
     @Operation(summary = "Excluir", description = "Excluir cliente Existente")
     @ApiResponse(responseCode = "204", description = "Excluído com sucesso")
     public ResponseEntity<Cliente> deletarCliente(@PathVariable Long id) {
-        clienteService.excluir(id);
+        service.excluir(id);
         return ResponseEntity.noContent().build();
     }
 }

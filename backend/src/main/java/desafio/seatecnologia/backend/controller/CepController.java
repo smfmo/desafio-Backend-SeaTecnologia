@@ -17,13 +17,13 @@ import org.springframework.web.bind.annotation.RestController;
 @Tag(name = "Cep")
 public class CepController {
 
-    private final CepService cepService;
+    private final CepService service;
 
     @GetMapping("/{cep}")
     @Operation(summary = "Buscar endereço", description = "Buscar endereço pelo Cep")
     @ApiResponse(responseCode = "200", description = "Endereço encontrado com sucesso")
     public EnderecoDto getEndereco(@PathVariable("cep") String cep) {
-        return cepService.buscarEnderecoPeloCep(cep);
+        return service.buscarEnderecoPeloCep(cep);
     }
 
 }
