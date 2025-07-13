@@ -451,4 +451,71 @@ DELETE /clientes/{id}
 ```
 ---
 
+## ✔️ Testes
+### Documentação dos testes de integração
+#### Visão geral:
+O projeto inclui testes de integração para validar
+o comportamento do sistema em um ambiente próximo ao real,
+interagindo com o banco de dados e testando as camadas de 
+persistência.
+
+#### Configurações do ambiente de teste
+Os teste utilizam o mesmo servidor do banco de dados da aplicação,
+apenas criei um novo database chamado cadastro-clientes-teste
+```
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5433/cadastro-clientes-test
+    username: postgres
+    password: 123456
+```
+#### Testes implementados:
+### 1. Testes de Cliente (ClienteRepositoryTest)
+
+Testes para operação CRUD de clientes, incluindo os 
+relacionamentos com endereço, telefones e emails.
+#### métodos de teste:
+1. deveSalvarClienteComSucesso()
+   - Testa o cadastro completo de um cliente com todos os atributos
+   - Verifica se os dados foram persistidos corretamente
+
+2. deveBuscarClientePorId()
+   - Testa a recuperação de um cliente pelo ID
+   - Verifica se os dados retornados correspondem aos salvos
+
+3. deveAtualizarCliente()
+   - Testa a atualização dos dados de um cliente existente
+   - Verifica se as alterações são persistidas
+
+4. deveExcluirCliente()
+   - Testa a exclusão de um cliente
+   - Verifica se o cliente foi removido do banco de dados
+
+#### Dados do teste:
+- Cria um cliente com:
+    - nome
+    - cpf
+    - Endereço completo
+    - Dois telefones (comercial, celular)
+    - dois emails
+  
+### 2. testes de usuário (ClienteRepositoryTest)
+Testes para operações de usuário, incluindo autenticação e roles
+#### métodos de teste:
+1. deveSalvarUsuarioComSucesso()
+    - Testa o cadastro de um usuário ADMIN
+    - Verifica se a senha foi criptografada
+    - Valida a role do usuário
+
+2. findByUsernameTest()
+   - Testa a busca de usuário pelo username
+   - Verifica a autenticação com senha criptografada
+   - Valida a role do usuário
+
+#### Dados do teste:
+- Cria dois tipos de usuário:
+  - ADMIN: username "admin", senha "123qwe!@#"
+  - USER: username "user", senha "123qwe123"
+
+
 
