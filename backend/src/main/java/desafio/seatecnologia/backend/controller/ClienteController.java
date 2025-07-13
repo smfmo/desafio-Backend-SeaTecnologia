@@ -28,7 +28,10 @@ public class ClienteController {
     @GetMapping
     @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
     @Operation(summary = "Listar Clientes", description = "listar todos os clientes")
-    @ApiResponse(responseCode = "200", description = "clientes encontrados com sucesso")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "clientes encontrados com sucesso"),
+            @ApiResponse(responseCode = "401", description = "Usuário não cadastrado")
+    })
     public ResponseEntity<List<Cliente>> listarClientes() {
         List<Cliente> clientes = service.findAll();
         return new ResponseEntity<>(clientes, HttpStatus.OK);
@@ -37,7 +40,10 @@ public class ClienteController {
     @GetMapping("/{id}")
     @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
     @Operation(summary = "Buscar dados", description = "retorna os dados do cliente pelo Id")
-    @ApiResponse(responseCode = "200", description = "Cliente encontrado com sucesso")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Cliente encontrado com sucesso"),
+            @ApiResponse(responseCode = "401", description = "Usuário não cadastrado")
+    })
     public ResponseEntity<ClienteDto> buscarClientePorId(@PathVariable("id") Long id) {
         Cliente cliente = service.buscarPorId(id);
         ClienteDto clienteDto = mapper.toDto(cliente);
@@ -49,7 +55,8 @@ public class ClienteController {
     @Operation(summary = "Salvar", description = "salvar novo cliente")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201", description = "salvo com sucesso"),
-            @ApiResponse(responseCode = "422", description = "Erro de validação")
+            @ApiResponse(responseCode = "422", description = "Erro de validação"),
+            @ApiResponse(responseCode = "401", description = "Usuário não cadastrado")
     })
     public ResponseEntity<Void> salvarCliente(@RequestBody @Valid ClienteDto dto) {
         Cliente cliente = mapper.toEntity(dto);
@@ -62,7 +69,8 @@ public class ClienteController {
     @Operation(summary = "Atualizar", description = "Atualizar cliente existente")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Atualizado com sucesso"),
-            @ApiResponse(responseCode = "422", description = "Erro de validação")
+            @ApiResponse(responseCode = "422", description = "Erro de validação"),
+            @ApiResponse(responseCode = "401", description = "Usuário não cadastrado")
     })
     public ResponseEntity<Cliente> atualizarCliente(@PathVariable Long id,
                                                     @RequestBody @Valid ClienteDto dto) {
@@ -73,7 +81,10 @@ public class ClienteController {
     @DeleteMapping("/{id}")
     @PreAuthorize("hasRole('ADMIN')")
     @Operation(summary = "Excluir", description = "Excluir cliente Existente")
-    @ApiResponse(responseCode = "204", description = "Excluído com sucesso")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "204", description = "Excluído com sucesso"),
+            @ApiResponse(responseCode = "401", description = "Usuário não cadastrado")
+    })
     public ResponseEntity<Cliente> deletarCliente(@PathVariable Long id) {
         service.excluir(id);
         return ResponseEntity.noContent().build();
