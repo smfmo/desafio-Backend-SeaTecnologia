@@ -25,11 +25,11 @@ vizualizar os dados)
 - ✅  Autenticação de usuários com diferentes perfis (admin e user);
 - ✅ Registro e visualização de clientes com os seguintes campos:
 
-    1. **Nome:** obrigatório, 3 a 100 caracteres, apenas letras, espaços e números.
-    2. **CPF:** obrigatório, salvo sem máscara no banco e exibido com máscara.
-    3. **Endereço:** integração com API externa via CEP, campos obrigatórios e edição permitida.
-    4. **Telefones:** múltiplos telefones com tipo e máscara por tipo.
-    5. **E-mails:** múltiplos e-mails, com pelo menos um obrigatório e válido.
+1. **Nome:** obrigatório, 3 a 100 caracteres, apenas letras, espaços e números. 
+2. **CPF:** obrigatório, salvo sem máscara no banco e exibido com máscara.
+3. **Endereço:** integração com API externa via CEP, campos obrigatórios e edição permitida.
+4. **Telefones:** múltiplos telefones com tipo e máscara por tipo.
+5. **E-mails:** múltiplos e-mails, com pelo menos um obrigatório e válido.
 
 ✅ Consumo de serviço de CEP externo (ViaCep);
 
@@ -61,6 +61,10 @@ aplicativos Docker multi-contêiner.
 - **SpringBoot dev tools:** ferramenta de desenvolvimento e outras funcionalidades.
 - **SpringWeb:** Módulo do Spring que contém ferramentas 
 para criar aplicações Web e serviços web RESTful.
+- **Junit:** Framework para escrever testes automatizados, utilizado na 
+aplicação para os testes de integração.
+- **Open-Api/Swagger:** Para documentação da API 
+(Endpoints, requests, respostas e etc.)
 
 ### 📝 Pom.xml:
 
@@ -77,6 +81,13 @@ para criar aplicações Web e serviços web RESTful.
 			<groupId>io.hypersistence</groupId>
 			<artifactId>hypersistence-utils-hibernate-55</artifactId>
 			<version>3.9.5</version>
+		</dependency>
+		
+		<!-- Open api - Swagger-->
+		<dependency>
+			<groupId>org.springdoc</groupId>
+			<artifactId>springdoc-openapi-ui</artifactId>
+			<version>1.6.9</version>
 		</dependency>
 
 		<!--Bean Validation-->
@@ -171,7 +182,7 @@ para criar aplicações Web e serviços web RESTful.
 ├── 📄 pom.xml                     
 
 ```
-
+---
 ## 🌐 Documentação da API
 A API esta documentada com Swagger, que permite vizualizar e testar todos
 os endpoints interativamente.
@@ -194,6 +205,8 @@ O projeto inclui testes de integração para validar
 o comportamento do sistema em um ambiente próximo ao real,
 interagindo com o banco de dados e testando as camadas de 
 persistência.
+Embora não fosse exigido, adicionei testes no Repository para garantir 
+que a comunicação com o banco de dados estava funcionando corretamente.
 
 #### Configurações do ambiente de teste
 Os teste utilizam o mesmo servidor do banco de dados da aplicação,
@@ -266,10 +279,8 @@ Isso criará dois containers
 - Pgadmin4 (porta 5050)
 
 #### passo 2: acessar o Pgadmin4
-1. no navegador:
-```
-http://localhost:5050
-```
+1. no navegador: `http://localhost:5050`
+
 2. Faça login:
    - Email: admin@admin.com
    - senha: admin
@@ -284,7 +295,7 @@ maintenance database: cadastro-clientes
 Username: postgres
 Password: 123456
 ```
-salve e conecte.
+Salve e conecte.
 #### Obs: as tabelas são criadas na hora da inicialização do container e os usuários admin e user ja são criados automaticamente. (para vizualização das tabelas, vá na raiz do projeto na pasta "db" e no arquivo "init.sql")
 
 ---
@@ -292,19 +303,11 @@ salve e conecte.
 Siga os passos abaixo para realizar a configuração
 do projeto:
 ### Clone o repositório
-```
-git clone https://github.com/smfmo/desafio-Backend-SeaTecnologia
-```
+`git clone https://github.com/smfmo/desafio-Backend-SeaTecnologia`
 ### Instale as dependências
-```
-mvn clean install
-```
-
+`mvn clean install`
 ### Execute a aplicação
-```
-mvn spring-boot:run
-```
-
+`mvn spring-boot:run`
 #### Obs: Suba a aplicação depois de incializar/startar os containers do banco de dados.
 
 ---
