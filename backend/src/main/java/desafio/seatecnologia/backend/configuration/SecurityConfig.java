@@ -39,9 +39,7 @@ public class SecurityConfig {
                 )
                 .httpBasic(Customizer.withDefaults())
                 .formLogin(form -> form
-                        .loginProcessingUrl("/login")
-                        .permitAll()
-
+                        .loginPage("/login")
                 )
                 .logout(logout -> logout
                         .logoutUrl("/logout")

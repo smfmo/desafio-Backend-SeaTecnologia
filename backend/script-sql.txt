@@ -1,4 +1,13 @@
 -- ARQUIVO DESTINADO AOS SCRIPTS DO BANCO DE DADOS --
+CREATE TABLE endereco ( -- endereços dos clientes --
+    id BIGSERIAL PRIMARY KEY NOT NULL,
+    bairro VARCHAR(100) NOT NULL,
+    logradouro VARCHAR(100) NOT NULL,
+    cep VARCHAR(10) NOT NULL,
+    complemento VARCHAR(255),
+    localidade VARCHAR(30) NOT NULL,
+    uf VARCHAR(2)NOT NULL
+);
 
 CREATE TABLE clientes ( -- clientes --
     id BIGSERIAL PRIMARY KEY NOT NULL,
@@ -8,16 +17,6 @@ CREATE TABLE clientes ( -- clientes --
 
     -- constraints --
     CONSTRAINT fk_endereco FOREIGN KEY (endereco_id) REFERENCES endereco(id) ON DELETE CASCADE
-);
-
-CREATE TABLE endereco ( -- endereços dos clientes --
-    id BIGSERIAL PRIMARY KEY NOT NULL,
-    bairro VARCHAR(100) NOT NULL,
-    logradouro VARCHAR(100) NOT NULL,
-    cep VARCHAR(10) NOT NULL,
-    complemento VARCHAR(255),
-    localidade VARCHAR(30) NOT NULL,
-    uf VARCHAR(2)NOT NULL
 );
 
 CREATE TABLE emails_cliente (

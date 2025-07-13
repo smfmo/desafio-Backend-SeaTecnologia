@@ -5,6 +5,9 @@ services:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: 123456
       POSTGRES_DB: cadastro-clientes
+    volumes:
+      # inicializa o container com todas as tabelas criadas e inserts de usuários
+      - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql
     ports:
       - "5433:5432"
     networks:

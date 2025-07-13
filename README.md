@@ -17,23 +17,19 @@ O sistema tem como objetivo gerenciar registros de clientes, respeitando regras
 específicas de validação, autenticação e controle de acesso. 
 O sistema conta com dois perfis de usuário:
 
-- Admin: possui acesso total ao sistema (cadastrar cliente, excluir, atualizar e 
+- **Admin:** possui acesso total ao sistema (cadastrar cliente, excluir, atualizar e 
 vizualizar os dados) 
-- user: possui apenas permissão de vizualização de dados.
+- **user:** possui apenas permissão de vizualização de dados.
 
 ## Funcionalidades implementadas
 - ✅  Autenticação de usuários com diferentes perfis (admin e user);
 - ✅ Registro e visualização de clientes com os seguintes campos:
 
-    1. Nome: obrigatório, 3 a 100 caracteres, apenas letras, espaços e números.
-
-    2. CPF: obrigatório, salvo sem máscara no banco e exibido com máscara.
-
-    3. Endereço: integração com API externa via CEP, campos obrigatórios e edição permitida.
-
-    4. Telefones: múltiplos telefones com tipo e máscara por tipo.
-
-    5. E-mails: múltiplos e-mails, com pelo menos um obrigatório e válido.
+    1. **Nome:** obrigatório, 3 a 100 caracteres, apenas letras, espaços e números.
+    2. **CPF:** obrigatório, salvo sem máscara no banco e exibido com máscara.
+    3. **Endereço:** integração com API externa via CEP, campos obrigatórios e edição permitida.
+    4. **Telefones:** múltiplos telefones com tipo e máscara por tipo.
+    5. **E-mails:** múltiplos e-mails, com pelo menos um obrigatório e válido.
 
 ✅ Consumo de serviço de CEP externo (ViaCep);
 
@@ -42,28 +38,28 @@ vizualizar os dados)
 # 🛠️ < Backend /> ☕
 
 ## 🚀 Tecnologias utilizadas
-- Java 8: Linguagem de programação para desenvolver a aplicação.
-- SpringBoot 2.7.18: Framework principal usado para
+- **Java 8:** Linguagem de programação para desenvolver a aplicação.
+- **SpringBoot 2.7.18:** Framework principal usado para
 construção de aplicações Java baseadas em Spring.
-- Maven: Ferramenta de automação de build e gerenciamento de
+- **Maven:** Ferramenta de automação de build e gerenciamento de
 dependências.
-- PostgreSQL 17 + Pgadmin4: Sistema de gerenciamento de
+- **PostgreSQL 17 + Pgadmin4:** Sistema de gerenciamento de
 banco de dados relacional + interface gráfica para gerenciamento
 do banco.
-- Docker-compose: Ferramenta para definir e executar 
+- **Docker-compose:** Ferramenta para definir e executar 
 aplicativos Docker multi-contêiner.
 (utilizado para criação dos containers do postgreSQL + Pgadmin4).
 
 ## ⚙️ Dependências
-- Spring Data JPA: Abstração da JPA para acesso a dados.
-- Hypersistence: biblioteca para otimizações avançadas de JPA/hibernate
-- Mapstruct: Gerador de mapeamento que converte entidade para Dto e vice-versa.
-- Lombok: Biblioteca que reduz o boilerplate
+- **Spring Data JPA:** Abstração da JPA para acesso a dados.
+- **Hypersistence:** biblioteca para otimizações avançadas de JPA/hibernate
+- **Mapstruct:** Gerador de mapeamento que converte entidade para Dto e vice-versa.
+- **Lombok:** Biblioteca que reduz o boilerplate
 (getters/setters, construtores e etc).
-- Spring Security: Módulo do Spring usado para autenticação e autorização.
-- Bean validation: Implementação da especificação de validação.
-- SpringBoot dev tools: ferramenta de desenvolvimento e outras funcionalidades.
-- SpringWeb: Módulo do Spring que contém ferramentas 
+- **Spring Security:** Módulo do Spring usado para autenticação e autorização.
+- **Bean validation:** Implementação da especificação de validação.
+- **SpringBoot dev tools:** ferramenta de desenvolvimento e outras funcionalidades.
+- **SpringWeb:** Módulo do Spring que contém ferramentas 
 para criar aplicações Web e serviços web RESTful.
 
 ### 📝 Pom.xml:
@@ -183,8 +179,8 @@ para criar aplicações Web e serviços web RESTful.
 ```
   POST /clientes
 ```
-- Descrição: Cria novo cliente
-- Acesso: ADMIN
+- **Descrição**: Cria novo cliente
+- **Acesso**: ADMIN
 
 #### RequestBody (application/json):
 
@@ -217,17 +213,17 @@ para criar aplicações Web e serviços web RESTful.
 }
 ```
 #### Response:
-- 201 Created: cliente criado
-- 422 UnprocessableEntity: dados inválidos
-- 403 Forbidden: acesso negado (usuário sem permissão)
-- 401 Unauthorized: não autorizado
+- **201 Created:** cliente criado
+- **422 UnprocessableEntity:** dados inválidos
+- **403 Forbidden:** acesso negado (usuário sem permissão)
+- **401 Unauthorized:** não autorizado
 ---
 ##### listar todos os clientes:
 ```
   GET /clientes
 ```
-- Descrição: Lista todos os clientes cadastrados
-- Acesso: ADMIN, USER
+- **Descrição:** Lista todos os clientes cadastrados
+- **Acesso:** ADMIN, USER
 
 #### Response (200 ok):
 ```
@@ -267,8 +263,8 @@ para criar aplicações Web e serviços web RESTful.
 ```
 GET /clientes/id={id}
 ```
-- Descrição: Busca cliente por Id
-- Acesso: ADMIN, USER
+- **Descrição:** Busca cliente por Id
+- **Acesso:** ADMIN, USER
 
 #### Parâmetros:
 
@@ -312,8 +308,8 @@ GET /clientes/id={id}
 ```
  PUT /clientes/{id}
 ```
-- Descrição: Atualiza cliente existente
-- Acesso: ADMIN
+- **Descrição:** Atualiza cliente existente
+- **Acesso:** ADMIN
 
 #### Parâmetros:
 
@@ -384,24 +380,24 @@ GET /clientes/id={id}
     }
 ```
 #### Outras responses:
-- 422 UnprocessableEntity: dados inválidos
-- 403 Forbidden: acesso negado (usuário sem permissão)
-- 401 Unauthorized: não autorizado
+- **422 UnprocessableEntity:** dados inválidos
+- **403 Forbidden:** acesso negado (usuário sem permissão)
+- **401 Unauthorized:** não autorizado
 ---
 
 ##### excluir clientes
 ```
 DELETE /clientes/{id}
 ```
-- Descrição: Remove o cliente
-- Acesso: ADMIN
+- **Descrição:** Remove o cliente
+- **Acesso:** ADMIN
 
 | nome | Tipo     | Descrição                      |
 |:-----|:---------|:-------------------------------|
 | `id` | `number` | **Obrigatório**. Id do cliente |
 
 #### Response:
-- 204 No Content  : Removido com sucesso
+- **204 No Content:** Removido com sucesso
 ---
 
 ### usuários
@@ -409,8 +405,8 @@ DELETE /clientes/{id}
 ```
  POST /usuarios
 ```
-- Descrição: Cria um novo usuário
-- Acesso: ADMIN
+- **Descrição:** Cria um novo usuário
+- **Acesso:** ADMIN
 
 #### RequestBody (application/Json):
 ```
@@ -423,15 +419,15 @@ DELETE /clientes/{id}
 }
 ```
 #### Responses: 
-- 201 Created: Usuário criado com sucesso
+- **201 Created:** Usuário criado com sucesso
 ---
 
 ### CEP (ViaCep)
 ```
   GET /cep/{cep}
 ```
-- Descrição: Consulta endereço por cep
-- Acesso: Público
+- **Descrição:** Consulta endereço por cep
+- **Acesso:** Público
 
 #### Parâmetros:
 | nome  | Tipo     | Descrição                                  |
@@ -450,7 +446,6 @@ DELETE /clientes/{id}
 }
 ```
 ---
-
 ## ✔️ Testes
 ### Documentação dos testes de integração
 #### Visão geral:
@@ -499,7 +494,7 @@ relacionamentos com endereço, telefones e emails.
     - Dois telefones (comercial, celular)
     - dois emails
   
-### 2. testes de usuário (ClienteRepositoryTest)
+### 2. testes de usuário (UsuarioRepositoryTest)
 Testes para operações de usuário, incluindo autenticação e roles
 #### métodos de teste:
 1. deveSalvarUsuarioComSucesso()
@@ -516,6 +511,65 @@ Testes para operações de usuário, incluindo autenticação e roles
 - Cria dois tipos de usuário:
   - ADMIN: username "admin", senha "123qwe!@#"
   - USER: username "user", senha "123qwe123"
+---
+## 🚀 Como executar
+### 🛢️ Banco de dados (Docker-compose.yml)
+#### passo 1: 
+No terminal, navegue até a pasta do projeto onde está o docker-compose.yml e execute:
+```
+docker compose up -d
+e quando ja estiver criado: docker compose start
+```
+Isso criará dois containers
+- PostgreSQL (porta 5433)
+- Pgadmin4 (porta 5050)
+
+#### passo 2: acessar o Pgadmin4
+1. no navegador:
+```
+http://localhost:5050
+```
+2. Faça login:
+   - Email: admin@admin.com
+   - senha: admin
+3. Conecte ao servidor PostgreSQL:
+   - clique em **"Add new Server"**
+   - nome: PostgreSQL17
+   - na aba **"Connection"**, preencha:
+```
+Host: postgres
+Port: 5432
+maintenance database: cadastro-clientes
+Username: postgres
+Password: 123456
+```
+salve e conecte.
+#### Obs: as tabelas são criadas na hora da inicialização do container e os usuários admin e user ja são criados automaticamente. (para vizualização das tabelas, vá na raiz do projeto na pasta "db" e no arquivo "init.sql")
+
+---
+### ☕ Aplicação
+Siga os passos abaixo para realizar a configuração
+do projeto:
+### Clone o repositório
+```
+git clone https://github.com/smfmo/desafio-Backend-SeaTecnologia
+```
+### Instale as dependências
+```
+mvn clean install
+```
+
+### Execute a aplicação
+```
+mvn spring-boot:run
+```
+
+#### Obs: Suba a aplicação depois de incializar/startar os containers do banco de dados.
+
+---
+
+
+
 
 
 
