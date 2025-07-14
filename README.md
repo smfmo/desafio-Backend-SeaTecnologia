@@ -33,7 +33,7 @@ vizualizar os dados)
 
 ✅ Consumo de serviço de CEP externo (ViaCep);
 
-✅ Separação entre projeto de serviço (backend) e projeto opcional de frontend.
+✅ Serviço completo do Backend
 
 ---
 ## 🚀 Como executar
