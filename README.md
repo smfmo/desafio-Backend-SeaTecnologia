@@ -74,10 +74,14 @@ Siga os passos abaixo para realizar a configuração
 do projeto:
 ### Clone o repositório
 `git clone https://github.com/smfmo/desafio-Backend-SeaTecnologia`
+### Pasta
+Navegue até a pasta `backend` e abra o projeto.
 ### Instale as dependências
 `mvn clean install`
 ### Execute a aplicação
 `mvn spring-boot:run`
+### Porta
+A aplicação estará disponível na porta `8080`
 #### Obs: Suba a aplicação depois de incializar/startar os containers do banco de dados.
 
 ---
@@ -212,7 +216,10 @@ aplicação para os testes de integração.
 │   │   │                 │    └── 📁 enums
 │   │   │                 ├── 📁 repository 
 │   │   │                 ├── 📁 security
-│   │   │                 ├── 📁 service         
+│   │   │                 ├── 📁 service     
+│   │   │                 ├── 📁 util.json 
+                          │    ├── 📁 deserializer
+                          │    └── 📁 serializer
 │   │   │                 └── 📄 RegistroClientesApplication.java 
 │   │   └── 📁 resources
 │   │        └── 📄 application.yml           
@@ -243,7 +250,7 @@ Após startar o projeto, será possível acessar a documentação da API:
     - senha: 123qwe!@# (acesso total)
 - **Usuário padrão:**
     - Usuario: user
-    - 123qwei123 (somente leitura)
+    - 123qwe123 (somente leitura)
 ---
 ## ✔️ Testes
 ### Documentação dos testes de integração
@@ -313,6 +320,10 @@ Testes para operações de usuário, incluindo autenticação e roles
   - ADMIN: username "admin", senha "123qwe!@#"
   - USER: username "user", senha "123qwe123"
 ---
+
+
+
+
 
 
 
