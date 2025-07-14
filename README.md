@@ -13,8 +13,7 @@ utilizando Java, SpringBoot e outras tecnologias solicitadas.
 
 # 📋 Descrição do Desafio
 O sistema tem como objetivo gerenciar registros de clientes, respeitando regras
-específicas de validação, autenticação e controle de acesso 
-(Optei por utilizar HttpBasic que já sanava a autenticação de ADMIN E USER e suas permissões). 
+específicas de validação, autenticação e controle de acesso . 
 O sistema conta com dois perfis de usuário:
 
 - **Admin:** possui acesso total ao sistema (cadastrar cliente, excluir, atualizar e 
