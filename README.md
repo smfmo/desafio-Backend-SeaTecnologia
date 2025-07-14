@@ -2,7 +2,6 @@
 <p align="center">
     <img src="https://www.vectorlogo.zone/logos/springio/springio-icon.svg" alt="Spring Boot" width="70" />
     <img src="https://www.vectorlogo.zone/logos/java/java-icon.svg" alt="Java" width="70" />
-    <img src="https://www.vectorlogo.zone/logos/reactjs/reactjs-icon.svg" alt="Java" width="70" />
 </p>
 Desafio técnico proposto pela SEA como parte do processo seletivo
 para a vaga de desenvolvedor Backend Júnior.
