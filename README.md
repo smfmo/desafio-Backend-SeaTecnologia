@@ -22,7 +22,7 @@ vizualizar os dados)
 - **user:** possui apenas permissão de vizualização de dados.
 
 ## Funcionalidades implementadas
-- ✅  Autenticação de usuários com diferentes perfis (admin e user);
+- ✅ Autenticação de usuários com diferentes perfis (admin e user);
 - ✅ Registro e visualização de clientes com os seguintes campos:
 
 1. **Nome:** obrigatório, 3 a 100 caracteres, apenas letras, espaços e números. 
@@ -34,6 +34,53 @@ vizualizar os dados)
 ✅ Consumo de serviço de CEP externo (ViaCep);
 
 ✅ Separação entre projeto de serviço (backend) e projeto opcional de frontend.
+
+---
+## 🚀 Como executar
+### 🛢️ Banco de dados (Docker-compose.yml)
+#### passo 1:
+No terminal, navegue até a pasta do projeto onde está o docker-compose.yml e execute:
+```
+docker compose up -d
+e quando ja estiver criado: docker compose start
+```
+Isso criará dois containers
+- PostgreSQL (porta 5433)
+- Pgadmin4 (porta 5050)
+
+#### passo 2: acessar o Pgadmin4
+1. no navegador: `http://localhost:5050`
+
+2. Faça login:
+    - Email: admin@admin.com
+    - senha: admin
+3. Conecte ao servidor PostgreSQL:
+    - clique em **"Add new Server"**
+    - nome: PostgreSQL17
+    - na aba **"Connection"**, preencha:
+```
+Host: postgres
+Port: 5432
+maintenance database: cadastro-clientes
+Username: postgres
+Password: 123456
+```
+Salve e conecte.
+#### Obs: as tabelas são criadas na hora da inicialização do container e os usuários admin e user ja são criados automaticamente. (para vizualização das tabelas, vá na raiz do projeto na pasta "db" e no arquivo "init.sql")
+
+---
+### ☕ Aplicação
+Siga os passos abaixo para realizar a configuração
+do projeto:
+### Clone o repositório
+`git clone https://github.com/smfmo/desafio-Backend-SeaTecnologia`
+### Instale as dependências
+`mvn clean install`
+### Execute a aplicação
+`mvn spring-boot:run`
+#### Obs: Suba a aplicação depois de incializar/startar os containers do banco de dados.
+
+---
 
 # 🛠️ < Backend /> ☕
 
@@ -265,51 +312,6 @@ Testes para operações de usuário, incluindo autenticação e roles
 - Cria dois tipos de usuário:
   - ADMIN: username "admin", senha "123qwe!@#"
   - USER: username "user", senha "123qwe123"
----
-## 🚀 Como executar
-### 🛢️ Banco de dados (Docker-compose.yml)
-#### passo 1: 
-No terminal, navegue até a pasta do projeto onde está o docker-compose.yml e execute:
-```
-docker compose up -d
-e quando ja estiver criado: docker compose start
-```
-Isso criará dois containers
-- PostgreSQL (porta 5433)
-- Pgadmin4 (porta 5050)
-
-#### passo 2: acessar o Pgadmin4
-1. no navegador: `http://localhost:5050`
-
-2. Faça login:
-   - Email: admin@admin.com
-   - senha: admin
-3. Conecte ao servidor PostgreSQL:
-   - clique em **"Add new Server"**
-   - nome: PostgreSQL17
-   - na aba **"Connection"**, preencha:
-```
-Host: postgres
-Port: 5432
-maintenance database: cadastro-clientes
-Username: postgres
-Password: 123456
-```
-Salve e conecte.
-#### Obs: as tabelas são criadas na hora da inicialização do container e os usuários admin e user ja são criados automaticamente. (para vizualização das tabelas, vá na raiz do projeto na pasta "db" e no arquivo "init.sql")
-
----
-### ☕ Aplicação
-Siga os passos abaixo para realizar a configuração
-do projeto:
-### Clone o repositório
-`git clone https://github.com/smfmo/desafio-Backend-SeaTecnologia`
-### Instale as dependências
-`mvn clean install`
-### Execute a aplicação
-`mvn spring-boot:run`
-#### Obs: Suba a aplicação depois de incializar/startar os containers do banco de dados.
-
 ---
 
 
