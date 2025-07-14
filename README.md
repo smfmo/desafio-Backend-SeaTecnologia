@@ -14,7 +14,8 @@ utilizando Java, SpringBoot e outras tecnologias solicitadas.
 
 # 📋 Descrição do Desafio
 O sistema tem como objetivo gerenciar registros de clientes, respeitando regras
-específicas de validação, autenticação e controle de acesso. 
+específicas de validação, autenticação e controle de acesso 
+(Optei por utilizar HttpBasic que já sanava a autenticação de ADMIN E USER e suas permissões). 
 O sistema conta com dois perfis de usuário:
 
 - **Admin:** possui acesso total ao sistema (cadastrar cliente, excluir, atualizar e 
@@ -251,6 +252,38 @@ Após startar o projeto, será possível acessar a documentação da API:
 - **Usuário padrão:**
     - Usuario: user
     - 123qwe123 (somente leitura)
+
+#### Obs: Para os testes de salvar e deletar utilize o Json:
+```
+{
+    "nome": "Samuel Monteiro Ferreira",
+    "cpf": "035.322.501-01",
+    "telefones": [
+        {
+            "tipo": "CELULAR",
+            "numero": "61 98336-3598"
+        },
+        {
+            "tipo": "RESIDENCIAL",
+            "numero": "61 3628-3376"
+        }
+    ],
+    "emails": [
+        "smf.ferreira1901@gmail.com",
+        "smf.monteiro1701@gmail.com"
+    ],
+    "endereco": {
+        "cep": "72860-515",
+        "logradouro": "Rua Exemplo",
+        "bairro": "Centro",
+        "localidade": "Brasília",
+        "uf": "DF",
+        "complemento": ""
+    }
+}
+```
+- Os dados são digitados com a máscara e salvos no banco sem máscara
+e na busca pelos dados são retornados com as respectivas máscaras.
 ---
 ## ✔️ Testes
 ### Documentação dos testes de integração
