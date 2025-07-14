@@ -1,5 +1,9 @@
 package desafio.seatecnologia.backend.controller.dto;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import desafio.seatecnologia.backend.util.json.deserializer.CepDeserializer;
+import desafio.seatecnologia.backend.util.json.serializer.CepSerializer;
 import lombok.Data;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
@@ -9,6 +13,8 @@ import javax.validation.constraints.Size;
 public class EnderecoDto {
     @NotBlank(message = "CEP é obrigatório")
     @Pattern(regexp = "^\\d{5}-?\\d{3}$", message = "CEP deve ter 8 dígitos (sem máscara)")
+    @JsonSerialize(using = CepSerializer.class)
+    @JsonDeserialize(using = CepDeserializer.class)
     private String cep;
 
     @NotBlank(message = "Logradouro é obrigatório")

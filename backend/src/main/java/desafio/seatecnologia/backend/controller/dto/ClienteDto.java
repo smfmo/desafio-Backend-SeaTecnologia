@@ -1,5 +1,9 @@
 package desafio.seatecnologia.backend.controller.dto;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import desafio.seatecnologia.backend.util.json.deserializer.CpfDeserializer;
+import desafio.seatecnologia.backend.util.json.serializer.CpfSerializer;
 import lombok.Data;
 import org.hibernate.validator.constraints.br.CPF;
 import javax.validation.Valid;
@@ -17,6 +21,8 @@ public class ClienteDto {
 
     @NotBlank(message = "cpf é obrigatório")
     @CPF(message = "cpf inválido")
+    @JsonSerialize(using = CpfSerializer.class)
+    @JsonDeserialize(using = CpfDeserializer.class)
     private String cpf;
 
     @Valid
