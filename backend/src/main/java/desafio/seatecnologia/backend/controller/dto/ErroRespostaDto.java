@@ -14,13 +14,4 @@ public class ErroRespostaDto {
     String mensagem;
     List<ErroCampoDto> erros;
 
-    public static ErroRespostaDto respostaPadrao(String mensagem) {
-        return new ErroRespostaDto(HttpStatus.BAD_REQUEST.value(), mensagem, Collections.emptyList());
-    }
-
-    public static ErroRespostaDto conflito(String mensagem) {
-        return new ErroRespostaDto(HttpStatus.CONFLICT.value(), mensagem, Collections.emptyList());
-    }
-
-
 }
