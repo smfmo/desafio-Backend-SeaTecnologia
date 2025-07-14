@@ -23,6 +23,7 @@ vizualizar os dados)
 
 ## Funcionalidades implementadas
 - ✅ Autenticação de usuários com diferentes perfis (admin e user);
+  obs: Optei por utilizar BasicAuth ao invés de JWT porque quis manter a solução simples e focada no core business (gestão dos clientes). É totalmente escalável para adicionar JWT posteriormente se necessário.
 - ✅ Registro e visualização de clientes com os seguintes campos:
 
 1. **Nome:** obrigatório, 3 a 100 caracteres, apenas letras, espaços e números. 
