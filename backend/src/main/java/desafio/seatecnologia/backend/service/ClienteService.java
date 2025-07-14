@@ -25,9 +25,10 @@ public class ClienteService {
 
     public Cliente buscarPorId(Long id) {
         return repository.findById(id).orElseThrow(
-                () -> new EntityNotFoundException("Cliente não encontrado com o id:" + id));
+                () -> new EntityNotFoundException("Cliente nao encontrado com o id:" + id));
     }
 
+    @Transactional
     public Cliente atualizar(Long id,Cliente clienteAtualizado) {
         Cliente clienteExistente =repository.findById(id).orElseThrow(
                 () -> new EntityNotFoundException("cliente não encontrado"));
