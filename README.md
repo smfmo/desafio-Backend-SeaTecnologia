@@ -218,8 +218,8 @@ aplicação para os testes de integração.
 │   │   │                 ├── 📁 security
 │   │   │                 ├── 📁 service     
 │   │   │                 ├── 📁 util.json 
-                          │    ├── 📁 deserializer
-                          │    └── 📁 serializer
+│   │   │                 │    ├── 📁 deserializer
+│   │   │                 │    └── 📁 serializer
 │   │   │                 └── 📄 RegistroClientesApplication.java 
 │   │   └── 📁 resources
 │   │        └── 📄 application.yml           
@@ -252,7 +252,7 @@ Após startar o projeto, será possível acessar a documentação da API:
     - Usuario: user
     - 123qwe123 (somente leitura)
 
-#### Obs: Para os testes de salvar e deletar utilize o Json:
+#### Obs: Para os testes de salvar e atualizar utilize o Json:
 ```
 {
     "nome": "Samuel Monteiro Ferreira",
