@@ -2,7 +2,6 @@
 <p align="center">
     <img src="https://www.vectorlogo.zone/logos/springio/springio-icon.svg" alt="Spring Boot" width="70" />
     <img src="https://www.vectorlogo.zone/logos/java/java-icon.svg" alt="Java" width="70" />
-    <img src="https://www.vectorlogo.zone/logos/reactjs/reactjs-icon.svg" alt="Java" width="70" />
 </p>
 Desafio técnico proposto pela SEA como parte do processo seletivo
 para a vaga de desenvolvedor Backend Júnior.
@@ -14,8 +13,7 @@ utilizando Java, SpringBoot e outras tecnologias solicitadas.
 
 # 📋 Descrição do Desafio
 O sistema tem como objetivo gerenciar registros de clientes, respeitando regras
-específicas de validação, autenticação e controle de acesso 
-(Optei por utilizar HttpBasic que já sanava a autenticação de ADMIN E USER e suas permissões). 
+específicas de validação, autenticação e controle de acesso . 
 O sistema conta com dois perfis de usuário:
 
 - **Admin:** possui acesso total ao sistema (cadastrar cliente, excluir, atualizar e 
@@ -24,6 +22,7 @@ vizualizar os dados)
 
 ## Funcionalidades implementadas
 - ✅ Autenticação de usuários com diferentes perfis (admin e user);
+  obs: Optei por utilizar BasicAuth ao invés de JWT porque quis manter a solução simples e focada no core business (gestão dos clientes). É totalmente escalável para adicionar JWT posteriormente se necessário.
 - ✅ Registro e visualização de clientes com os seguintes campos:
 
 1. **Nome:** obrigatório, 3 a 100 caracteres, apenas letras, espaços e números. 
@@ -34,7 +33,7 @@ vizualizar os dados)
 
 ✅ Consumo de serviço de CEP externo (ViaCep);
 
-✅ Separação entre projeto de serviço (backend) e projeto opcional de frontend.
+✅ Serviço completo do Backend
 
 ---
 ## 🚀 Como executar
@@ -219,8 +218,8 @@ aplicação para os testes de integração.
 │   │   │                 ├── 📁 security
 │   │   │                 ├── 📁 service     
 │   │   │                 ├── 📁 util.json 
-                          │    ├── 📁 deserializer
-                          │    └── 📁 serializer
+│   │   │                 │    ├── 📁 deserializer
+│   │   │                 │    └── 📁 serializer
 │   │   │                 └── 📄 RegistroClientesApplication.java 
 │   │   └── 📁 resources
 │   │        └── 📄 application.yml           
@@ -253,7 +252,7 @@ Após startar o projeto, será possível acessar a documentação da API:
     - Usuario: user
     - 123qwe123 (somente leitura)
 
-#### Obs: Para os testes de salvar e deletar utilize o Json:
+#### Obs: Para os testes de salvar e atualizar utilize o Json:
 ```
 {
     "nome": "Samuel Monteiro Ferreira",
