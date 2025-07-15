@@ -8,11 +8,14 @@ import desafio.seatecnologia.backend.model.Endereco;
 import desafio.seatecnologia.backend.model.Telefone;
 import org.mapstruct.Mapper;
 
+import java.util.List;
+
 @Mapper(componentModel = "spring")
 public interface ClienteMapper {
 
     Cliente toEntity(ClienteDto dto);
     ClienteDto toDto(Cliente cliente);
+    List<ClienteDto> toDto(List<Cliente> cliente);
 
     Endereco toEntity(EnderecoDto enderecoDto);
     Telefone toEntity(TelefoneDto telefoneDto);

@@ -32,9 +32,10 @@ public class ClienteController {
             @ApiResponse(responseCode = "200", description = "clientes encontrados com sucesso"),
             @ApiResponse(responseCode = "401", description = "Usuário não cadastrado")
     })
-    public ResponseEntity<List<Cliente>> listarClientes() {
+    public ResponseEntity<List<ClienteDto>> listarClientes() {
         List<Cliente> clientes = service.findAll();
-        return new ResponseEntity<>(clientes, HttpStatus.OK);
+        List<ClienteDto> clienteDtos = mapper.toDto(clientes);
+        return new ResponseEntity<>(clienteDtos, HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
@@ -46,8 +47,8 @@ public class ClienteController {
     })
     public ResponseEntity<ClienteDto> buscarClientePorId(@PathVariable("id") Long id) {
         Cliente cliente = service.buscarPorId(id);
-        ClienteDto clienteDto = mapper.toDto(cliente);
-        return ResponseEntity.ok(clienteDto);
+        ClienteDto clientesDto = mapper.toDto(cliente);
+        return ResponseEntity.ok(clientesDto);
     }
 
     @PostMapping
